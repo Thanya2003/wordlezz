@@ -2,29 +2,49 @@ import Header from './component/header.jsx'
 import './styles/wordle.css'
 import Grid from './component/grid.jsx'
 import Keyboard from './component/keyboard.jsx'
-import english_words from './component/english.json'
+import getLanguageConfigs from './component/language-configs'
 import { useEffect, useState } from 'react'
-function Wordle(){
+import { useSearchParams } from 'react-router-dom'
+function Wordle(props){
 
+    const [searchParams] = useSearchParams();
+    const width = parseInt(searchParams.get("width"))
+    const height = parseInt(searchParams.get("height"))
+    const language = searchParams.get("language")
+    const [mysteryWord, setMysteryWord] = useState(null)
+    const [validWords, setValidWords] = useState([])
     const [currentRow, setCurrentRow] =useState(0)
     const [currentWord, setCurrentWord] = useState("")
     const [guessWords, setGuessWords]= useState([])
     const [pressedKey, setPressedKey]= useState("")
     const [flashMessage, setFlashMessages]= useState(null)
-    
-    const width=5
-    const height=6
-    const validEnglish=Object.keys
-        (english_words).filter((word)=>
-        (word.length===width)).map((word)=> word.toUpperCase())
-        const [mysteryWord, setMysteryWord] = useState(
-            validEnglish[Math.floor(Math.random()*(validEnglish.length))]
-        )
+    const [keyboard, setKeyboard]= useState([])
+
+ 
     const onKeyPress=(key)=>{
         setPressedKey(key)
         
     }
     
+    useEffect(()=>{
+       const config =getLanguageConfigs()[language]
+       fetch(config.wordsurls, {
+        headers:{
+            'Content-type':'application/json',
+            'Accept':'applicatio/json'
+        }
+       })
+       .then(response=> response.json())
+       .then(data=>{
+        const validWords= Object.keys(data)
+        .filter(word=>word.length== width)
+        .map(word=>word.toUpperCase())
+        setValidWords(validWords)
+        setMysteryWord(validWords[Math.floor(Math.random()*validWords.length)])
+        setKeyboard(config.keyboard)
+       })
+    },[])
+
     useEffect(()=>{
         if(pressedKey===""){
             return;
@@ -61,7 +81,7 @@ function Wordle(){
             if(currentWord.length<width){
                 flash("Not enough letters")
             }else{
-                if(validEnglish.includes(currentWord)){
+                if(validWords.includes(currentWord)){
                     setCurrentRow(currentRow+1)
                     setGuessWords([...guessWords, currentWord])
                     setCurrentWord("")
@@ -117,15 +137,33 @@ function Wordle(){
     }
     const userWon=guessWords.includes(mysteryWord)
     const userLost= !guessWords.includes(mysteryWord) && guessWords.length==height
+
+    useEffect(()=>{
+        const handleKeyDown=(event)=>{
+            const key= event.key.toUpperCase();
+            if(key==="BACKSPACE"){
+                setPressedKey("BACKSPACE");
+            }else if(key === "ENTER"){
+                setPressedKey("ENTER");
+            }else if(/^[A-Z]$/.test(key)){
+                setPressedKey(key);
+            }
+        }
+        window.addEventListener("keydown", handleKeyDown)
+
+        return()=>{
+            window.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [currentWord, pressedKey, width])
     return(
         <div className="app-cont">
            <Header/> 
            {userWon && <div className='Winner'> You Win! </div>}
-           {userLost && <div className='losser'> You Lost! </div>}
+           {userLost && <div className='losser'> You Lost! </div> && <div classname="mys">{mysteryWord}</div>}
            {flashMessage!=null && <div className='flash'>{flashMessage}</div>}
            <Grid width={width} height={height} 
           content={getContent()}/>
-           <Keyboard onKeyPress={(key)=>onKeyPress(key)}/>
+           <Keyboard keyboardconfiguration={keyboard} onKeyPress={(key)=>onKeyPress(key)}/>
         </div>
         
     )

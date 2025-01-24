@@ -1,20 +1,66 @@
-html{
+html {
     background-color: rgb(18, 18, 19);
-}
-.Winner{
-    color: green;
-    margin-top: 30px;
-    text-align: center;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Remove default margin */
 }
 
-.losser{
-    color: red;
-    margin-top: 30px;
+/* Winner Message */
+.Winner {
+    color: #4CAF50; /* Bright Green */
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
+    padding: 10px;
+    margin: 42%;
+
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    display: inline-block;
+    background-color: rgba(76, 175, 80, 0.1);
+    margin-top: 20px;
 }
-.flash{
-    color: white;
-    border: white;
-    margin-top: 30px;
+
+/* Loser Message */
+.losser {
+    color: #FF4C4C; /* Bright Red */
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
+    padding: 10px;
+    margin: 42%;
+    border: 2px solid #FF4C4C;
+    border-radius: 8px;
+    display: inline-block;
+    background-color: rgba(255, 76, 76, 0.1);
+    margin-top: 20px;
+}
+
+/* Flash Message */
+.flash {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin: 42%;
+    border: 2px solid white;
+    border-radius: 8px;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+}
+
+/* Mystery Word */
+.mys {
+    font-weight: bold;
+    margin: 42%;
+
+    color: #FFD700; /* Gold color for emphasis */
+    font-size: 22px;
+    text-align: center;
+    margin-top: 20px;
 }

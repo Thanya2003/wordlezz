@@ -1,0 +1,57 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margin */
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(18, 18, 19);
+}
+
+.new-game-cont {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for smoother look */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    width: 300px; /* Fixed width for the container */
+    height: 400px; /* Set a fixed height to prevent it from expanding too much */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Offsetting by 50% of width and height */
+}
+
+label {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+select {
+    width: 200px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+button {
+    margin-top: 20px;
+    height: 60px;
+    width: 180px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
