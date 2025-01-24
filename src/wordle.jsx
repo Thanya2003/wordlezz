@@ -19,7 +19,7 @@ function Wordle(props){
     const [pressedKey, setPressedKey]= useState("")
     const [flashMessage, setFlashMessages]= useState(null)
     const [keyboard, setKeyboard]= useState([])
-
+    console.log({mysteryWord})
  
     const onKeyPress=(key)=>{
         setPressedKey(key)
@@ -159,13 +159,15 @@ function Wordle(props){
         <div className="app-cont">
            <Header/> 
            {userWon && <div className='Winner'> You Win! </div>}
-           {userLost && <div className='losser'> You Lost! </div> && <div classname="mys">{mysteryWord}</div>}
+           {userLost && <div>
+    <div className='losser'> You Lost! </div>
+    <div className="mys">{mysteryWord}</div>
+  </div>}
            {flashMessage!=null && <div className='flash'>{flashMessage}</div>}
            <Grid width={width} height={height} 
           content={getContent()}/>
            <Keyboard keyboardconfiguration={keyboard} onKeyPress={(key)=>onKeyPress(key)}/>
         </div>
-        
     )
 }
 export default Wordle

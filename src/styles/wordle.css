@@ -15,12 +15,12 @@ html {
     font-weight: bold;
     text-align: center;
     padding: 10px;
-    margin-left: 42%;
+    margin-left: 45%;
     border: 2px solid #4CAF50;
     border-radius: 8px;
     display: inline-block;
     background-color: rgba(76, 175, 80, 0.1);
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* Loser Message */
@@ -30,12 +30,12 @@ html {
     font-weight: bold;
     text-align: center;
     padding: 10px;
-    margin-left: 43%;
+    margin-left: 45%;
     border: 2px solid #FF4C4C;
     border-radius: 8px;
     display: inline-block;
     background-color: rgba(255, 76, 76, 0.1);
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* Flash Message */
@@ -45,7 +45,7 @@ html {
     font-weight: bold;
     text-align: center;
     padding: 10px;
-    margin-left: 43%;
+    margin-left: 45%;
     border: 2px solid white;
     border-radius: 8px;
     display: inline-block;
@@ -56,8 +56,7 @@ html {
 /* Mystery Word */
 .mys {
     font-weight: bold;
-    margin-left: 42%;
-
+    /* margin-left: ; */
     color: #FFD700; /* Gold color for emphasis */
     font-size: 22px;
     text-align: center;
